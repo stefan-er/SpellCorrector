@@ -42,7 +42,7 @@
             foreach (string inputWord in inputWords)
             {
                 string correctedWord = inputWord;
-                for (int distance = 1; distance <= inputWord.Length; distance++)
+                for (int distance = 0; distance <= inputWord.Length; distance++)
                 {
                     List<string> suggestions = this.bkTree.Search(inputWord, distance);
 

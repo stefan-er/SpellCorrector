@@ -51,11 +51,13 @@ namespace SpellCorrector.Web.Infrastructure
                     if (i == 1)
                         matrix[0, j] = j;
 
-                    var vals = new int[] {
-                    matrix[i - 1, j] + 1,
-                    matrix[i, j - 1] + 1,
-                    matrix[i - 1, j - 1] + cost
-                };
+                    var vals = new int[] 
+                    {
+                        matrix[i - 1, j] + 1,
+                        matrix[i, j - 1] + 1,
+                        matrix[i - 1, j - 1] + cost
+                    };
+
                     matrix[i, j] = vals.Min();
                     if (i > 1 && j > 1 && original[i - 1] == modified[j - 2] && original[i - 2] == modified[j - 1])
                         matrix[i, j] = Math.Min(matrix[i, j], matrix[i - 2, j - 2] + cost);
