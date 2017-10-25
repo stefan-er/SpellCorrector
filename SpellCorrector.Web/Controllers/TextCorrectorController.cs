@@ -14,7 +14,10 @@
 
         public TextCorrectorController()
         {
-            this.bkTree = new BKTree();
+            //ILevenshteinDistanceAlgorithm levenshteinDistanceAlgorithm = new LevenshteinDistanceAlgorithm();
+            ILevenshteinDistanceAlgorithm levenshteinDistanceAlgorithm = new DamerauLevenshteinDistanceAlgorithm();
+
+            this.bkTree = new BKTree(levenshteinDistanceAlgorithm);
 
             FileStream fileStream = new FileStream("Dictionary\\Bulgarian.dic.txt", FileMode.Open);
             using (StreamReader reader = new StreamReader(fileStream))
@@ -39,7 +42,7 @@
             foreach (string inputWord in inputWords)
             {
                 string correctedWord = inputWord;
-                for (int distance = 1; distance <= 4; distance++)
+                for (int distance = 1; distance <= inputWord.Length; distance++)
                 {
                     List<string> suggestions = this.bkTree.Search(inputWord, distance);
 
